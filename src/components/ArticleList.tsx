@@ -1,6 +1,7 @@
 import React, {FC} from 'react';
 
 import {Card, Loader, Dimmer} from 'semantic-ui-react';
+import {Link} from 'react-router-dom';
 import {Article} from '../models/Article';
 
 export interface ArticleListProps {
@@ -22,6 +23,8 @@ const ArticleList: FC<ArticleListProps> = ({
         {articles.map(article => (
           <Card
             key={article.id}
+            as={Link}
+            to={'/articles/' + article.id}
             header={article.title}
             image={article.eyecatch}
             description={article.body}

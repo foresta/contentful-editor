@@ -13,7 +13,7 @@ import {Article, EmptyArticle} from '../models/Article';
 import './ArticleEditor.css';
 
 export interface ArticleEditorProps {
-  article: Article;
+  article?: Article | null;
   isLoading?: boolean;
 }
 
@@ -21,6 +21,20 @@ const ArticleEditor: FC<ArticleEditorProps> = ({
   article = EmptyArticle,
   isLoading = false,
 }) => {
+  if (isLoading) {
+    return (
+      <>
+        <Dimmer active inverted>
+          <Loader inverted={false}>読み込み中...</Loader>
+        </Dimmer>
+      </>
+    );
+  }
+
+  if (article === null) {
+    return <Header as="h1">Article Not found</Header>;
+  }
+
   const eyecatchStyle = {
     backgroundImage: 'url(' + article.eyecatch + ')',
   };

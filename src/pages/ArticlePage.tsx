@@ -1,19 +1,9 @@
 import React, {FC} from 'react';
 import {RouteComponentProps, withRouter} from 'react-router';
 import {Container, Header} from 'semantic-ui-react';
-import ArticleEditor from '../components/ArticleEditor';
+import ArticleEditor from '../containers/ArticleEditor';
 
 import './ArticlePage.css';
-
-import {Article} from '../models/Article';
-
-const testArticle: Article = {
-  id: '1',
-  title: 'article 1',
-  eyecatch: 'https://placehold.jp/320x200.png',
-  body:
-    'This is article1.This is article1.This is article1.This is article1.This is article1.This is article1.This is article1.This is article1.',
-};
 
 type ArticlePageProps = RouteComponentProps<{articleId: string}>;
 
@@ -24,7 +14,7 @@ const ArticlePage: FC<ArticlePageProps> = ({match}) => {
   return (
     <Container>
       <Header as="h1">Article Edit</Header>
-      <ArticleEditor article={testArticle} isLoading={false} />
+      <ArticleEditor id={articleId} />
     </Container>
   );
 };
