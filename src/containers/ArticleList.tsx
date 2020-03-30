@@ -20,7 +20,7 @@ interface DispatchProps {
 type EnhancedArticleListProps = ArticleListProps & StateProps & DispatchProps;
 
 const mapStateToProps = (state: ArticlesState): StateProps => ({
-  articles: state.articles,
+  articles: state.list,
   isLoading: state.isLoading,
 });
 

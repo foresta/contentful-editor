@@ -1,7 +1,6 @@
 import {createClient} from 'contentful-management';
 
 const client = createClient({
-  // TODO: env file
   accessToken: process.env.REACT_APP_CONTENTFUL_ACCESS_TOKEN!,
 });
 

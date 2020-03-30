@@ -1,8 +1,9 @@
 import {Article} from '../../models/Article';
 import client, {spaceId} from './client';
 import {Collection} from 'contentful-management/typings/collection';
-import {Entry} from 'contentful-management/typings/entry';
 import {Asset} from 'contentful-management/typings/asset';
+import {Entry} from 'contentful-management/typings/entry';
+import {Environment} from 'contentful-management/typings/environment';
 
 const convertArticles = (
   entities: Collection<Entry>,
@@ -22,10 +23,14 @@ const convertArticle = (entry: Entry, eyecatches: Asset[]): Article => {
   };
 };
 
+const getEnvironment = async (): Promise<Environment> => {
+    const space = await client.getSpace(spaceId);
+    return await space.getEnvironment('master');
+}
+
 export const getArticlesFactory = () => {
   const getArticles = async (): Promise<Article[]> => {
-    const space = await client.getSpace(spaceId);
-    const environment = await space.getEnvironment('master');
+    const environment = await getEnvironment();
     const entries = await environment.getEntries({content_type: 'article'});
 
     const eyecatches = await Promise.all(
@@ -39,4 +44,16 @@ export const getArticlesFactory = () => {
   };
 
   return getArticles;
+};
+
+export const getArticleByIdFactory = () => {
+  const getArticleById = async (id: string): Promise<Article> => {
+    const environment = await getEnvironment();
+    const entry = await environment.getEntry(id);
+
+    const eyecatch = await environment.getAsset(entry.fields.eyecatch['ja-JP'].sys.id);
+    return convertArticle(entry, [eyecatch]);
+  };
+
+  return getArticleById;
 };

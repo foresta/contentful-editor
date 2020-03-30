@@ -1,0 +1,11 @@
+.ui.segment.editor-container {
+  width: 660px;
+  margin: 0 auto;
+  border-radius: 0;
+}
+
+.ui.image.editor-eyecatch {
+  max-width: calc(100% + 2em);
+  width: calc(100% + 2em);
+  margin: -1em -1em 0;
+}

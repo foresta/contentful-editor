@@ -8,6 +8,14 @@ interface GetArticlesResult {
   articles: Article[];
 }
 
+interface GetArticleByIdParams {
+  id: string;
+}
+
+interface GetArticleByIdResult {
+  article: Article;
+}
+
 export const getArticles = {
   start: (params: GetArticlesParams) => ({
     type: ActionType.GET_ARTICLES_START as typeof ActionType.GET_ARTICLES_START,
@@ -16,7 +24,7 @@ export const getArticles = {
 
   succeed: (params: GetArticlesParams, result: GetArticlesResult) => ({
     type: ActionType.GET_ARTICLES_SUCCEED as typeof ActionType.GET_ARTICLES_SUCCEED,
-    payload: {params, result},
+    payload: {params, list: result},
   }),
 
   fail: (params: GetArticlesParams, error: AxiosError) => ({
@@ -26,7 +34,27 @@ export const getArticles = {
   }),
 };
 
+export const getArticleById = {
+  start: (params: GetArticleByIdParams) => ({
+    type: ActionType.GET_ARTICLE_BY_ID_START as typeof ActionType.GET_ARTICLE_BY_ID_START,
+    payload: params,
+  }),
+
+  succeed: (params: GetArticleByIdParams, result: GetArticleByIdResult) => ({
+    type: ActionType.GET_ARTICLE_BY_ID_SUCCEED as typeof ActionType.GET_ARTICLE_BY_ID_SUCCEED,
+    payload: {params, single: result},
+  }),
+
+  fail: (params: GetArticleByIdParams, error: AxiosError) => ({
+    type: ActionType.GET_ARTICLE_BY_ID_FAIL as typeof ActionType.GET_ARTICLE_BY_ID_FAIL,
+    payload: {params, error},
+  }),
+};
+
 export type ArticlesAction =
   | ReturnType<typeof getArticles.start>
   | ReturnType<typeof getArticles.succeed>
-  | ReturnType<typeof getArticles.fail>;
+  | ReturnType<typeof getArticles.fail>
+  | ReturnType<typeof getArticleById.start>
+  | ReturnType<typeof getArticleById.succeed>
+  | ReturnType<typeof getArticleById.fail>;

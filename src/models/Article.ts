@@ -4,3 +4,10 @@ export interface Article {
   eyecatch: string;
   body: string;
 }
+
+export const EmptyArticle: Article = {
+  id: '',
+  title: '',
+  eyecatch: '',
+  body: '',
+};

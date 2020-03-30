@@ -3,8 +3,9 @@ import {Redirect, Route, Switch} from 'react-router';
 import {Link} from 'react-router-dom';
 import {Header, Container} from 'semantic-ui-react';
 
-import Home from './components/Home';
-import Articles from './components/Articles';
+import HomePage from './pages/HomePage';
+import ArticlesPage from './pages/ArticlesPage';
+import ArticlePage from './pages/ArticlePage';
 
 import './App.css';
 
@@ -21,8 +22,9 @@ const App: FC = () => (
     </header>
 
     <Switch>
-      <Route path="/" exact component={Home} />
-      <Route path="/articles" component={Articles} />
+      <Route path="/" exact component={HomePage} />
+      <Route path="/articles/:articleId" component={ArticlePage} />
+      <Route path="/articles" component={ArticlesPage} />
       <Redirect to="/" />
     </Switch>
   </>
