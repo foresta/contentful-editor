@@ -1,17 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+import {Provider} from 'react-redux';
+import {createStore, applyMiddleware} from 'redux';
 import {BrowserRouter} from 'react-router-dom';
+import createSagaMiddleware from 'redux-saga';
+
+import App from './App';
+import reducer from './reducer';
+import rootSaga from './sagas/articles';
+
+import * as serviceWorker from './serviceWorker';
 
 import 'semantic-ui-css/semantic.min.css';
 import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+
+const sagaMiddleware = createSagaMiddleware();
+const store = createStore(reducer, applyMiddleware(sagaMiddleware));
 
 ReactDOM.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>,
+  <Provider store={store}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Provider>,
   document.getElementById('root'),
 );
 
@@ -19,3 +30,4 @@ ReactDOM.render(
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
+sagaMiddleware.run(rootSaga);

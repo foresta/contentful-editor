@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 
-import {Card, Loader, Segment, Dimmer} from 'semantic-ui-react';
+import {Card, Loader, Dimmer} from 'semantic-ui-react';
 import {Article} from '../models/Article';
 
 export interface ArticleListProps {
