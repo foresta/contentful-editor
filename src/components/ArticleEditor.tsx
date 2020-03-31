@@ -49,7 +49,12 @@ const ArticleEditor: FC<ArticleEditorProps> = ({
         <Segment className="editor-container">
           <Form>
             <Image src={article.eyecatch} className="editor-eyecatch" />
-            <Header as="h1">{article.title}</Header>
+            <h1
+              contentEditable="true"
+              placeholder="記事タイトル..."
+              className="ui header">
+              {article.title}
+            </h1>
             <TextArea>{article.body}</TextArea>
           </Form>
         </Segment>
