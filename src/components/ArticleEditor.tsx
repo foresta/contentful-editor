@@ -35,10 +35,6 @@ const ArticleEditor: FC<ArticleEditorProps> = ({
     return <Header as="h1">Article Not found</Header>;
   }
 
-  const eyecatchStyle = {
-    backgroundImage: 'url(' + article.eyecatch + ')',
-  };
-
   return (
     <>
       {isLoading ? (

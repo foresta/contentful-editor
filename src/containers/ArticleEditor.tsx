@@ -46,7 +46,7 @@ const ArticleEditorContainer: FC<EnhanceArticleEditorProps> = ({
 }) => {
   useEffect(() => {
     getArticleByIdStart(id);
-  }, [getArticleByIdStart]);
+  }, [getArticleByIdStart, id]);
 
   return <ArticleEditor article={article} isLoading={isLoading} />;
 };
