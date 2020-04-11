@@ -21,3 +21,17 @@
   border: none;
   outline: none;
 }
+
+.ui.input.article-title {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.ui.input.article-title input[type=text]{
+  padding: 16px 0;
+  border: none;
+  font-weight: 700;
+  line-height: 1.3em;
+  font-size: 2rem;
+  width: 100%;
+}

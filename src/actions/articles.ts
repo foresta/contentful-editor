@@ -51,10 +51,32 @@ export const getArticleById = {
   }),
 };
 
+
+interface UpdateArticleBodyParams {
+  body: string;
+}
+
+export const updateArticleBody = (params: UpdateArticleBodyParams) => ({
+  type: ActionType.UPDATE_ARTICLE_BODY as typeof ActionType.UPDATE_ARTICLE_BODY,
+  payload: params
+});
+
+
+interface UpdateArticleTitleParams {
+  title: string
+}
+
+export const updateArticleTitle = (params: UpdateArticleTitleParams) => ({
+  type: ActionType.UPDATE_ARTICLE_TITLE as typeof ActionType.UPDATE_ARTICLE_TITLE,
+  payload: params
+});
+
 export type ArticlesAction =
   | ReturnType<typeof getArticles.start>
   | ReturnType<typeof getArticles.succeed>
   | ReturnType<typeof getArticles.fail>
   | ReturnType<typeof getArticleById.start>
   | ReturnType<typeof getArticleById.succeed>
-  | ReturnType<typeof getArticleById.fail>;
+  | ReturnType<typeof getArticleById.fail>
+  | ReturnType<typeof updateArticleBody>
+  | ReturnType<typeof updateArticleTitle>;
