@@ -1,4 +1,4 @@
-import React, {FC, useRef, ChangeEvent} from 'react';
+import React, {FC} from 'react';
 
 import {
   Form,
@@ -29,6 +29,7 @@ const ArticleEditor: FC<ArticleEditorProps> = ({
   onTitleChange,
 }) => {
   const onSaveButtonClicked = () => {
+    console.log(article)
   }
 
   if (isLoading) {
@@ -52,26 +53,30 @@ const ArticleEditor: FC<ArticleEditorProps> = ({
           <Loader inverted={false}>読み込み中...</Loader>
         </Dimmer>
       ) : (
-        <Segment className="editor-container">
-          <Form>
-            <Button primary onClick={ onSaveButtonClicked }></Button>
-            <Image src={article.eyecatch} className="editor-eyecatch" />
-            <Input 
-              placeholder="記事タイトル..." 
-              value={article.title} 
-              onChange={(e, data) => onTitleChange(data.value) }
-              className="article-title" />
-            <ReactQuill 
-              theme="snow" 
-              value={article.body} 
-              onChange={(newValue, delta, source) => {
-                if (source === 'user') {
-                  onBodyChange(newValue)
+        <>
+          <div className="settings-container">
+            <Button primary onClick={ onSaveButtonClicked }>保存</Button>
+          </div>
+          <Segment className="editor-container">
+            <Form>
+              <Image src={article.eyecatch} className="editor-eyecatch" />
+              <Input 
+                placeholder="記事タイトル..." 
+                value={article.title} 
+                onChange={(e, data) => onTitleChange(data.value) }
+                className="article-title" />
+              <ReactQuill 
+                theme="snow" 
+                value={article.body} 
+                onChange={(newValue, delta, source) => {
+                  if (source === 'user') {
+                    onBodyChange(newValue)
+                  }
                 }
-              }
               } />
-          </Form>
-        </Segment>
+            </Form>
+          </Segment>
+        </>
       )}
     </>
   );
