@@ -68,6 +68,7 @@ const ArticleEditor: FC<ArticleEditorProps> = ({
               <ReactQuill 
                 theme="snow" 
                 value={article.body} 
+                placeholder="テキストを入力..."
                 onChange={(newValue, delta, source) => {
                   if (source === 'user') {
                     onBodyChange(newValue)
