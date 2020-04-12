@@ -4,20 +4,33 @@
   border-radius: 0;
 }
 
+.settings-container {
+  width: 660px;
+  margin: 10px auto;
+  display: flex;
+  justify-content: flex-end;
+}
+
 .ui.image.editor-eyecatch {
   max-width: calc(100% + 2em);
   width: calc(100% + 2em);
   margin: -1em -1em 0;
 }
 
-[contenteditable='true']:empty:before {
-  content: attr(placeholder);
-  pointer-events: none;
-  display: block; /* For Firefox */
-  color: #ccc;
+.ui.input.article-title {
+  width: 100%;
+  margin: 0 auto;
 }
 
-[contenteditable='true']:focus {
+.ui.input.article-title input[type=text]{
+  padding: 16px 0;
   border: none;
-  outline: none;
+  font-weight: 700;
+  line-height: 1.3em;
+  font-size: 2rem;
+  width: 100%;
+}
+
+.quill {
+  margin: 0 -1em -1em;
 }

@@ -58,6 +58,25 @@ const articlesReducer: Reducer<ArticlesState, ArticlesAction> = (
         isLoading: false,
         error: action.payload.error,
       };
+    case ActionType.UPDATE_ARTICLE_BODY:
+      if (state.single == null) {
+        return { ...state }
+      }
+
+      return {
+        ...state,
+        single: { ...state.single, body: action.payload.body }
+      }
+
+    case ActionType.UPDATE_ARTICLE_TITLE:
+      if (state.single == null) {
+        return { ...state }
+      }
+
+      return {
+        ...state,
+        single: { ...state.single, title: action.payload.title }
+      }
     default: {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const _: never = action;

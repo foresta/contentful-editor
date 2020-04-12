@@ -3,24 +3,35 @@ import React, {FC} from 'react';
 import {
   Form,
   Header,
-  TextArea,
   Image,
   Segment,
   Loader,
   Dimmer,
+  Input,
+  Button,
 } from 'semantic-ui-react';
 import {Article, EmptyArticle} from '../models/Article';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css'
 import './ArticleEditor.css';
 
 export interface ArticleEditorProps {
   article?: Article | null;
   isLoading?: boolean;
+  onBodyChange: (content: string) => void;
+  onTitleChange: (title: string) => void;
 }
 
 const ArticleEditor: FC<ArticleEditorProps> = ({
   article = EmptyArticle,
   isLoading = false,
+  onBodyChange,
+  onTitleChange,
 }) => {
+  const onSaveButtonClicked = () => {
+    console.log(article)
+  }
+
   if (isLoading) {
     return (
       <>
@@ -42,18 +53,31 @@ const ArticleEditor: FC<ArticleEditorProps> = ({
           <Loader inverted={false}>読み込み中...</Loader>
         </Dimmer>
       ) : (
-        <Segment className="editor-container">
-          <Form>
-            <Image src={article.eyecatch} className="editor-eyecatch" />
-            <h1
-              contentEditable="true"
-              placeholder="記事タイトル..."
-              className="ui header">
-              {article.title}
-            </h1>
-            <TextArea>{article.body}</TextArea>
-          </Form>
-        </Segment>
+        <>
+          <div className="settings-container">
+            <Button primary onClick={ onSaveButtonClicked }>保存</Button>
+          </div>
+          <Segment className="editor-container">
+            <Form>
+              <Image src={article.eyecatch} className="editor-eyecatch" />
+              <Input 
+                placeholder="記事タイトル..." 
+                value={article.title} 
+                onChange={(e, data) => onTitleChange(data.value) }
+                className="article-title" />
+              <ReactQuill 
+                theme="snow" 
+                value={article.body} 
+                placeholder="テキストを入力..."
+                onChange={(newValue, delta, source) => {
+                  if (source === 'user') {
+                    onBodyChange(newValue)
+                  }
+                }
+              } />
+            </Form>
+          </Segment>
+        </>
       )}
     </>
   );
